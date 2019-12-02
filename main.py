@@ -23,8 +23,15 @@ for header in headers:
 
 row = 0
 while row < no_rows-1:
-    product['Name'][row] = Product(sno=product['S.no'][row], name=product['Name'][row], height=product['Height'][row], barcode=product['Barcode'][row])
-    row += 1
+    try:
+        product['Name'][row] = Product(sno=product['S.no'][row], name=product['Name'][row],
+                                       height=product['Height'][row], barcode=product['Barcode'][row],
+                                       inventory=product['Inventory'][row])
+        row += 1
+    except KeyError:
+        product['Name'][row] = Product(sno=product['S.no'][row], name=product['Name'][row],
+                                       height=product['Height'][row], barcode=product['Barcode'][row])
+        row += 1
 
 product['Name'][0].show()
 product['Name'][1].show()
